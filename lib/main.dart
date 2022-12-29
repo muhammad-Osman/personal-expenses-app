@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './transaction.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,6 +16,33 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
+  final List<Transaction> transaction = [
+    Transaction(
+      id: "t1",
+      title: "New Shose",
+      amount: 69.22,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: "t1",
+      title: "New Shirt",
+      amount: 22.22,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: "t1",
+      title: "New Pent",
+      amount: 22.22,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: "t1",
+      title: "New Coat",
+      amount: 22.22,
+      date: DateTime.now(),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,12 +52,43 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Card(
-            child: Text("CHART!"),
+          Container(
+            width: double.infinity,
+            child: Card(
+              color: Colors.blue,
+              child: Text(
+                "CHART!",
+              ),
+              elevation: 5,
+            ),
           ),
-          Card(
-            child: Text("LIST OF TX!"),
+          Column(
+            children: transaction.map((tx) {
+              return Card(
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        tx.amount.toString(),
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          tx.title,
+                        ),
+                        Text(
+                          tx.date.toString(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),
